@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (magnSensor == null) {
             Log.e("Compass MainActivity", "Registerered for ORIENTATION Sensor");
             Toast.makeText(this, "Sensor is not found", Toast.LENGTH_LONG).show();
-            finish();
         }
     }
 
@@ -84,9 +83,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             canvas.drawBitmap(myBitmap, wShift, hShift, null);
 
             double len = Math.sqrt(x_val * x_val + y_val * y_val);
-            int x = getWidth() / 2 + (int) ((x_val / len) * pointerLen);
-            int y = getHeight() / 2 - (int) ((y_val / len) * pointerLen);
-            canvas.drawLine(getWidth() / 2, getHeight() / 2, x, y,  p);
+            if (len != 0) {
+                int x = getWidth() / 2 + (int) ((x_val / len) * pointerLen);
+                int y = getHeight() / 2 - (int) ((y_val / len) * pointerLen);
+                canvas.drawLine(getWidth() / 2, getHeight() / 2, x, y, p);
+            }
         }
 
     }

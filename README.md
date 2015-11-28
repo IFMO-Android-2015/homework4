@@ -1,4 +1,6 @@
-# Компас
-Написать просто приложени "Компас". Должно состоять из одного экрана, отрисовывать направление на север, считывать показания сенсора.
+# Skinned Compass v1.0
+![screenshot1](master/screenshots/shot1.png)
+![screenshot2](master/screenshots/shot2.png)
+![screenshot3](master/screenshots/shot3.png)
 
-## В pull-request-ы добавляйте, пожалуйста, сним экрана того, что получилось.
+Сделано в идее.

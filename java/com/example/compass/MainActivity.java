@@ -56,13 +56,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+            //Если не использую метод clone(), то getRotationMatrix не работает
             accData = event.values.clone();
         }
         if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD){
             magnetData = event.values.clone();
         }
         if (accData != null && magnetData != null){
-
             SensorManager.getRotationMatrix(RMatrix, IMatrix, accData, magnetData);
             SensorManager.getOrientation(RMatrix, orientation);
 

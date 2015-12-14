@@ -27,15 +27,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(myView);
         sm = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);;
         sensor = sm.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-        if (savedInstanceState == null) {
-            sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-        }
     }
 
     protected void onResume() {
         super.onResume();
         sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
+
+    protected void onPause() {
+        super.onPause();
+        sm.unregisterListener(this);
+    }
+
     float x;
 
     public void onSensorChanged(SensorEvent event) {
@@ -43,24 +46,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         x = (float) (Math.PI * x / 180);
         Log.w("Here: ", x + "");
         myView.invalidate();
-        //sm.unregisterListener(this);
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outstate) {
-        super.onSaveInstanceState(outstate);
-        outstate.putFloat("x", x);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        x = savedInstanceState.getFloat("x");
     }
 
     class MyView extends View {

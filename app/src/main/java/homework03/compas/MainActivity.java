@@ -18,17 +18,23 @@ import android.hardware.SensorManager;
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
     SensorManager sm;
     Sensor sensor;
+    MyView myView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyView view = new MyView(this);
-        setContentView(view);
+        myView = new MyView(this);
+        setContentView(myView);
         sm = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);;
         sensor = sm.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         if (savedInstanceState == null) {
             sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
+    }
+
+    protected void onResume() {
+        super.onResume();
+        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
     float x;
 
@@ -36,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         x = event.values[0];
         x = (float) (Math.PI * x / 180);
         Log.w("Here: ", x + "");
-        sm.unregisterListener(this);
+        myView.invalidate();
+        //sm.unregisterListener(this);
     }
 
     @Override
@@ -83,17 +90,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             float centerX = canvas.getWidth() / 2;
             float centerY = canvas.getHeight() / 2;
             float length = canvas.getHeight() / 4;
-
             canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), paintRect);
             canvas.drawCircle(centerX, centerY, length, paintCircle);
-
-            float XX = (float) (Math.sin(x)) - 1;
-            float YY = (float) (Math.cos(x)) - 1;
+            float XX = (float) (-Math.sin(x));
+            float YY = (float) (-Math.cos(x));
             float L = (float) Math.sqrt(XX * XX + YY * YY);
             canvas.drawLine(centerX, centerY, centerX + length * XX / L, centerY + length * YY / L, paintAngle);
             canvas.drawText("Blue line points on the North", centerX / 3, centerY / 3, paintText);
         }
-
 
     }
 

@@ -28,4 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
         Sm.registerListener(view, sensor, SensorManager.SENSOR_DELAY_UI);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Sm.unregisterListener(view);
+    }
 }

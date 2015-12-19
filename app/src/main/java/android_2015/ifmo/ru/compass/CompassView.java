@@ -16,11 +16,12 @@ public class CompassView extends View implements SensorEventListener {
 
     Paint paint = new Paint();
     float x = 0, y = 0;
+    DisplayMetrics metrics = new DisplayMetrics();
+
 
     public CompassView(Context context) {
         super(context);
     }
-
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -34,28 +35,26 @@ public class CompassView extends View implements SensorEventListener {
 
     }
 
-    DisplayMetrics metrics = new DisplayMetrics();
-
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         wm.getDefaultDisplay().getMetrics(metrics);
-        int center_x = metrics.widthPixels / 2;
-        int center_y = metrics.heightPixels / 2;
+        int centerX = metrics.widthPixels / 2;
+        int centerY = metrics.heightPixels / 2;
 
         int radius = metrics.heightPixels / 6;
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(10);
         //circle
-        canvas.drawCircle(center_x, center_y, radius, paint);
+        canvas.drawCircle(centerX, centerY, radius, paint);
         paint.setColor(Color.BLUE);
         //line
         float norm = 1 / (float) Math.sqrt(x * x + y * y);
-        int stopX = (int) (center_x + radius * x * norm);
-        int stopY = (int) (center_y + radius * y * norm);
-        canvas.drawLine(center_x, center_y, stopX, stopY, paint);
+        int stopX = (int) (centerX + radius * x * norm);
+        int stopY = (int) (centerY + radius * y * norm);
+        canvas.drawLine(centerX, centerY, stopX, stopY, paint);
         invalidate();
     }
 

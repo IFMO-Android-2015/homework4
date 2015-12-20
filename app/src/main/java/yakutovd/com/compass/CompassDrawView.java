@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -16,12 +17,12 @@ public class CompassDrawView extends View implements SensorEventListener {
     /*
      *  South directed arrow
      */
-    private static final Paint redPaint = new Paint();
+    private static final Paint redPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     /*
      *  North directed arrow
      */
-    private static final Paint bluePaint = new Paint();
+    private static final Paint bluePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     /*
      *  Circle around
@@ -38,10 +39,14 @@ public class CompassDrawView extends View implements SensorEventListener {
      */
 
     static {
-        redPaint.setColor(Color.RED);
+        redPaint.setColor(Color.parseColor("#A80000"));
         redPaint.setStrokeWidth(10);
-        bluePaint.setColor(Color.BLUE);
+        redPaint.setStyle(Paint.Style.FILL);
+        redPaint.setAntiAlias(true);
+        bluePaint.setColor(Color.parseColor("#003870"));
         bluePaint .setStrokeWidth(10);
+        bluePaint.setStyle(Paint.Style.FILL);
+        bluePaint.setAntiAlias(true);
         blackPaint.setColor(Color.BLACK);
         blackPaint.setStrokeWidth(10);
         backgroundPaint.setColor(Color.WHITE);
@@ -73,8 +78,22 @@ public class CompassDrawView extends View implements SensorEventListener {
         canvas.drawCircle(centerX, centerY, (float) (radius * 1.02), blackPaint);
         canvas.drawCircle(centerX, centerY, radius, backgroundPaint);
         canvas.rotate(-currentAngle, centerX, centerY);
-        canvas.drawLine(centerX, centerY, centerX + radius, centerY, redPaint);
-        canvas.drawLine(centerX, centerY, centerX - radius, centerY, bluePaint);
+//        canvas.drawLine(centerX, centerY, centerX + radius, centerY, redPaint);
+//        canvas.drawLine(centerX, centerY, centerX - radius, centerY, bluePaint);
+        float base = (float) (0.13 * radius);
+        drawTriangle(centerX + radius, centerY, centerX, centerY + base / 2, centerX, centerY - base / 2, redPaint, canvas);
+        drawTriangle(centerX - radius, centerY, centerX, centerY + base / 2, centerX, centerY - base / 2, bluePaint, canvas);
+    }
+
+    private void drawTriangle(float ax, float ay, float bx, float by, float cx, float cy, Paint paint, Canvas canvas) {
+        Path path = new Path();
+        path.setFillType(Path.FillType.EVEN_ODD);
+        path.moveTo(ax, ay);
+        path.lineTo(bx, by);
+        path.lineTo(cx, cy);
+        path.lineTo(ax, ay);
+        path.close();
+        canvas.drawPath(path, paint);
     }
 
     @Override

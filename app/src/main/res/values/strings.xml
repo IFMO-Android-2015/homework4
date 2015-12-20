@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Compass</string>
+    <string name="debugInfo">Azimuth: %1$f\nPitch: %2$f\nRoll: %3$f</string>
+</resources>

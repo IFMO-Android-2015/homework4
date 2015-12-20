@@ -78,8 +78,6 @@ public class CompassDrawView extends View implements SensorEventListener {
         canvas.drawCircle(centerX, centerY, (float) (radius * 1.02), blackPaint);
         canvas.drawCircle(centerX, centerY, radius, backgroundPaint);
         canvas.rotate(-currentAngle, centerX, centerY);
-//        canvas.drawLine(centerX, centerY, centerX + radius, centerY, redPaint);
-//        canvas.drawLine(centerX, centerY, centerX - radius, centerY, bluePaint);
         float base = (float) (0.13 * radius);
         drawTriangle(centerX + radius, centerY, centerX, centerY + base / 2, centerX, centerY - base / 2, redPaint, canvas);
         drawTriangle(centerX - radius, centerY, centerX, centerY + base / 2, centerX, centerY - base / 2, bluePaint, canvas);

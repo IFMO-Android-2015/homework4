@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Compass</string>
+
+    <string name="degrees">0.0</string>
+    <string name="compasss">compass</string>
+    <string name="arroww">arrow</string>
+    <string name="text">North: 0.0 deg.</string>
+</resources>

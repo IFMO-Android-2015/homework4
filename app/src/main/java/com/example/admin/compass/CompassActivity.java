@@ -11,25 +11,42 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 public class CompassActivity extends Activity implements SensorEventListener  {
+
     private ImageView compassImage;
-    private float deg = 0F;
-    private SensorManager sensorManager;
+    private float deg = 0f;
+    private SensorManager mSensorManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         setContentView(R.layout.activity_compass);
         compassImage = (ImageView) findViewById(R.id.CompassView);
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
+                SensorManager.SENSOR_DELAY_GAME);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(this);
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         float newDeg = Math.round(event.values[0]);
-        RotateAnimation rotateAnimation = new RotateAnimation(deg, -newDeg,
+        RotateAnimation rotateAnimation = new RotateAnimation(
+                deg,
+                -newDeg,
                 Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF,
                 0.5f);
-        rotateAnimation.setDuration(500);
+        rotateAnimation.setDuration(100);
         rotateAnimation.setFillAfter(true);
         compassImage.startAnimation(rotateAnimation);
         deg = -newDeg;

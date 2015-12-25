@@ -28,14 +28,14 @@ public class Compass extends View implements SensorEventListener {
         super.onDraw(canvas);
         float width = getWidth();
         float height = getHeight();
-        float center = Math.min((int) width, (int) height) / 2.6f;
+        float center = Math.min((int) width, (int) height) / 3f;
         width /= 2;
         height /= 2;
         double R = Math.sqrt(X * X + Y * Y);
         double dx = center * X / R;
         double dy = center * Y / R;
-        canvas.drawLine(width, height, (float) (width + dx), (float) (height + dy), ArrowN);
-        canvas.drawLine(width, height, (float) (width - dx), (float) (height - dy), ArrowS);
+        canvas.drawLine(width, height, (float) (width + dx), (float) (height - dy), ArrowN);
+        canvas.drawLine(width, height, (float) (width - dx), (float) (height + dy), ArrowS);
     }
 
     @Override

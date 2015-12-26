@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+        <!--<FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content">-->
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2" android:src="@drawable/compass"
+                android:layout_centerVertical="true" android:layout_centerHorizontal="true" android:scaleType="centerInside"
+                android:adjustViewBounds="true"/>
+        <com.vantuz.compass.app.CompassView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/compass"
+                android:layout_alignBottom="@id/imageView2" android:layout_alignTop="@id/imageView2"
+                android:layout_alignLeft="@id/imageView2" android:layout_alignRight="@id/imageView2"
+        />
+        <!--</FrameLayout>-->
+</RelativeLayout>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">HW4</string>
+    <string name="compassInfo">Серая линия указывает на север</string>
+</resources>

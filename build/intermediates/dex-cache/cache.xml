@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/alexey/Downloads/hw3/app/build/intermediates/incremental-classes/debug/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="16e9d95892edba9bbf73036bcc21133c7070c10b">
+        <dex dex="/Users/alexey/Downloads/hw3/app/build/intermediates/pre-dexed/debug/classes_88230e07af69838e2f9b6fa8181ead531d2b70e0.jar" />
+    </item>
+
+</items>

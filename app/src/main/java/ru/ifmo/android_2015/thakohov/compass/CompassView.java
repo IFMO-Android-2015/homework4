@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -25,10 +24,6 @@ public class CompassView extends View implements SensorEventListener {
         super(context, attrs);
 
         init();
-
-        SensorManager manager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        Sensor sensor = manager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        manager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override

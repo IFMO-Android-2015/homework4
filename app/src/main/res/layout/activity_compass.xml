@@ -11,6 +11,7 @@
     tools:context=".CompassActivity">
 
     <ru.ifmo.android_2015.thakohov.compass.CompassView
+        android:id = "@+id/compass_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>
